@@ -5,7 +5,7 @@
 \title{Load a file that may be in either JSON or tabular format}
 \usage{
 from_json_or_tab(txt, json = FALSE, tab = FALSE, header = FALSE,
-  stringsAsFactors = FALSE, ...)
+  stringsAsFactors = TRUE, ...)
 }
 \arguments{
 \item{txt}{a JSON string, a URL, or a JSON or tabular file}
@@ -14,11 +14,15 @@ from_json_or_tab(txt, json = FALSE, tab = FALSE, header = FALSE,
 
 \item{tab}{indicates tabular input}
 
-\item{...}{additional arguments to be passed to `fromJSON` or `read.table`}
+\item{...}{additional arguments to be passed to \code{fromJSON} or
+\code{read.table}}
 }
 \value{
 a list representing the input data
 }
 \description{
 Regardless of the input format, a list will be returned
+}
+\seealso{
+\link{\code{simplify_data_frames}}
 }
