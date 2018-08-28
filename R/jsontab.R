@@ -2,6 +2,15 @@
 # jsontab.R
 #===============================================================================
 
+# Imports ======================================================================
+
+#' @import jsonlite
+
+
+
+
+# Functions ====================================================================
+
 #' @title Load a file that may be in either JSON or tabular format
 #'
 #' @description Regardless of the input format, a list will be returned

@@ -2,3 +2,4 @@
 
 export(from_json_or_tab)
 export(simplify_data_frames)
+import(jsonlite)
