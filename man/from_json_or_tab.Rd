@@ -24,5 +24,5 @@ a list representing the input data
 Regardless of the input format, a list will be returned
 }
 \seealso{
-\link{\code{simplify_data_frames}}
+\code{\link{simplify_data_frames}}
 }

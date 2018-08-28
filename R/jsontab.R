@@ -22,7 +22,7 @@
 #'   \code{read.table}
 #' @return a list representing the input data
 #' @export
-#' @seealso \link{\code{simplify_data_frames}}
+#' @seealso \code{\link{simplify_data_frames}}
 from_json_or_tab <- function(
   txt, 
   json = FALSE, 
@@ -72,7 +72,7 @@ from_json_or_tab <- function(
 #' @param x a list of lists to be converted to a list of data frames.
 #' @return a list of data frames
 #' @export
-#' @seealso \link{\code{from_json_or_tab}}
+#' @seealso \code{\link{from_json_or_tab}}
 simplify_data_frames <- function(x) {
   lapply(x, as.data.frame)
 }
