@@ -73,6 +73,6 @@ from_json_or_tab <- function(
 #' @return a list of data frames
 #' @export
 #' @seealso \code{\link{from_json_or_tab}}
-simplify_data_frames <- function(x) {
-  lapply(x, as.data.frame)
+simplify_data_frames <- function(x, stringsAsFactors = TRUE) {
+  lapply(x, as.data.frame, stringsAsFactors = stringsAsFactors)
 }
