@@ -31,9 +31,9 @@ from_json_or_tab <- function(
   stringsAsFactors = TRUE,
   ...
 ) {
-  if (json && !table) {
+  if (json && !tab) {
     fromJSON(txt, ...)
-  } else if (!json && table) {
+  } else if (tab && !json) {
     list(
       as.list(
         read.table(
