@@ -4,10 +4,13 @@
 \alias{simplify_data_frames}
 \title{Simplify data frames in input data}
 \usage{
-simplify_data_frames(x)
+simplify_data_frames(x, stringsAsFactors = TRUE)
 }
 \arguments{
 \item{x}{a list of lists to be converted to a list of data frames.}
+
+\item{stringsAsFactors}{logical: should character vectors be converted to
+factor vectors?}
 }
 \value{
 a list of data frames

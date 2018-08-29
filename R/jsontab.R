@@ -70,6 +70,8 @@ from_json_or_tab <- function(
 #' \code{from_json_or_tab} and returns a list of data frames.
 #'
 #' @param x a list of lists to be converted to a list of data frames.
+#' @param stringsAsFactors logical: should character vectors be converted to
+#'   factor vectors?
 #' @return a list of data frames
 #' @export
 #' @seealso \code{\link{from_json_or_tab}}
