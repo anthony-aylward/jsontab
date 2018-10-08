@@ -53,7 +53,7 @@ from_json_or_tab <- function(
             read.table(
               txt,
               header = header,
-              stringsAsFactors = stringAsFactors,
+              stringsAsFactors = stringsAsFactors,
               ...
             )
           )
