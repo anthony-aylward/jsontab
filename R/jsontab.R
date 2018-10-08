@@ -57,9 +57,9 @@ from_json_or_tab <- function(
               ...
             )
           )
+        )
         print(str(x))
         x
-        )
       }
     )
   }
