@@ -34,7 +34,7 @@ from_json_or_tab <- function(
   if (json && !tab) {
     fromJSON(txt, ...)
   } else if (tab && !json) {
-    list(
+    x <- list(
       as.list(
         read.table(
           txt,
@@ -44,6 +44,8 @@ from_json_or_tab <- function(
         )
       )
     )
+    print(str(x))
+    x
   } else {
     tryCatch(
       fromJSON(txt, ...),
@@ -76,6 +78,5 @@ from_json_or_tab <- function(
 #' @export
 #' @seealso \code{\link{from_json_or_tab}}
 simplify_data_frames <- function(x, stringsAsFactors = TRUE) {
-  print(str(x))
   lapply(x, as.data.frame, stringsAsFactors = stringsAsFactors)
 }
