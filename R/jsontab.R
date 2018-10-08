@@ -48,7 +48,7 @@ from_json_or_tab <- function(
     tryCatch(
       fromJSON(txt, ...),
       error = function(e) {
-        x <- list(
+        list(
           as.list(
             read.table(
               txt,
@@ -58,8 +58,6 @@ from_json_or_tab <- function(
             )
           )
         )
-        print(str(x))
-        x
       }
     )
   }
