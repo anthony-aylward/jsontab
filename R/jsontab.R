@@ -76,6 +76,5 @@ from_json_or_tab <- function(
 #' @export
 #' @seealso \code{\link{from_json_or_tab}}
 simplify_data_frames <- function(x, stringsAsFactors = TRUE) {
-  print(head(x))
   lapply(x, as.data.frame, stringsAsFactors = stringsAsFactors)
 }
