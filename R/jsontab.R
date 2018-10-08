@@ -34,7 +34,7 @@ from_json_or_tab <- function(
   if (json && !tab) {
     fromJSON(txt, ...)
   } else if (tab && !json) {
-    x <- list(
+    list(
       as.list(
         read.table(
           txt,
@@ -44,13 +44,11 @@ from_json_or_tab <- function(
         )
       )
     )
-    print(str(x))
-    x
   } else {
     tryCatch(
       fromJSON(txt, ...),
       error = function(e) {
-        list(
+        x <- list(
           as.list(
             read.table(
               txt,
@@ -59,6 +57,8 @@ from_json_or_tab <- function(
               ...
             )
           )
+        print(str(x))
+        x
         )
       }
     )
