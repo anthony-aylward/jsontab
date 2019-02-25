@@ -1,2 +1,2 @@
 # jsontab
-Agnostically load JSON or tabular data in R
+Agnostically load JSON or tabular data in R or python3
