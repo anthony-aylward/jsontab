@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='betabernsum',
-    version='0.0.1',
+    version='0.0.2',
     author='Anthony Aylward',
     author_email='aaylward@eng.ucsd.edu',
     description='Agnostically load JSON or tabular data',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/anthony-aylward/betabernsum.git',
+    url='https://github.com/anthony-aylward/jsontab.git',
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
