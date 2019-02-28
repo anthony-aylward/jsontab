@@ -18,7 +18,7 @@ import pandas as pd
 # Functions ====================================================================
 
 def from_json(
-    filename_or_buffer,
+    filepath_or_buffer,
     orient='columns',
     dtype=None,
     columns=None,
@@ -44,17 +44,25 @@ def from_json(
     DataFrame
         a pandas data frame
     """
-
-    return pd.DataFrame.from_dict(
-        json.load(filename_or_buffer, **kwargs),
-        orient=orient,
-        dtype=dtype,
-        columns=columns
-    )
+    if isinstance(filepath_or_buffer, str):
+        with open(filepath_or_buffer, 'r') as f:
+            return pd.DataFrame.from_dict(
+                json.load(filepath_or_buffer, **kwargs),
+                orient=orient,
+                dtype=dtype,
+                columns=columns
+            )
+    else:
+        return pd.DataFrame.from_dict(
+                json.load(filepath_or_buffer, **kwargs),
+                orient=orient,
+                dtype=dtype,
+                columns=columns
+            )
 
 
 def from_json_or_tab(
-    filename_or_buffer,
+    filepath_or_buffer,
     json=False,
     tab=False,
     orient='columns',
@@ -85,22 +93,22 @@ def from_json_or_tab(
 
     if json and not tab:
         return from_json(
-            filename_or_buffer,
+            filepath_or_buffer,
             orient=orient,
             dtype=dtype,
             columns=columns,
             **kwargs
         )
     elif tab and not json:
-        return pd.read_csv(filename_or_buffer, **kwargs)
+        return pd.read_csv(filepath_or_buffer, **kwargs)
     else:
         try:
             return from_json(
-                filename_or_buffer,
+                filepath_or_buffer,
                 orient=orient,
                 dtype=dtype,
                 columns=columns,
                 **kwargs
             )
         except:
-            return pd.read_csv(filename_or_buffer, **kwargs)
+            return pd.read_csv(filepath_or_buffer, **kwargs)
