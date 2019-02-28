@@ -47,18 +47,18 @@ def from_json(
     if isinstance(filepath_or_buffer, str):
         with open(filepath_or_buffer, 'r') as f:
             return pd.DataFrame.from_dict(
-                json.load(filepath_or_buffer, **kwargs),
+                json.load(f, **kwargs),
                 orient=orient,
                 dtype=dtype,
                 columns=columns
             )
     else:
         return pd.DataFrame.from_dict(
-                json.load(filepath_or_buffer, **kwargs),
-                orient=orient,
-                dtype=dtype,
-                columns=columns
-            )
+            json.load(filepath_or_buffer, **kwargs),
+            orient=orient,
+            dtype=dtype,
+            columns=columns
+        )
 
 
 def from_json_or_tab(
