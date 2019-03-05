@@ -17,6 +17,22 @@ import pandas as pd
 
 # Functions ====================================================================
 
+def generate_flat_items(d):
+    """Generate flattened items from a nested dict
+
+    Parameters
+    ----------
+    d : dict
+        a dictionary
+    """
+
+    for k, v in d.items():
+        if isinstance(v, dict):
+            yield from ((f'{k}_{l}', w) for l, w in v.items())
+        else:
+            yield k, v
+
+
 def from_json(
     filepath_or_buffer,
     orient='columns',
@@ -44,21 +60,18 @@ def from_json(
     DataFrame
         a pandas data frame
     """
+
     if isinstance(filepath_or_buffer, str):
         with open(filepath_or_buffer, 'r') as f:
-            return pd.DataFrame.from_dict(
-                json.load(f, **kwargs),
-                orient=orient,
-                dtype=dtype,
-                columns=columns
-            )
+            j = json.load(f, **kwargs)
     else:
-        return pd.DataFrame.from_dict(
-            json.load(filepath_or_buffer, **kwargs),
-            orient=orient,
-            dtype=dtype,
-            columns=columns
-        )
+        j = json.load(filepath_or_buffer, **kwargs)
+    return pd.DataFrame.from_dict(
+        dict(generate_flat_items(j)),
+        orient=orient,
+        dtype=dtype,
+        columns=columns
+    )
 
 
 def from_json_or_tab(
