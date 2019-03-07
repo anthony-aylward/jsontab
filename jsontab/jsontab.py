@@ -62,9 +62,25 @@ def from_json(
             for k, v in j.items()
         }
     if structure == 'list':
-        return [pd.DataFrame.from_dict(v) for v in j.values()]
+        return [
+            pd.DataFrame.from_dict(
+                v,
+                orient=orient,
+                dtype=dtype,
+                columns=columns
+            )
+            for v in j.values()
+        ]
     if structure == 'tuple':
-        return tuple(pd.DataFrame.from_dict(v) for v in j.values())
+        return tuple(
+            pd.DataFrame.from_dict(
+                v,
+                orient=orient,
+                dtype=dtype,
+                columns=columns
+            )
+            for v in j.values()
+        )
 
 
 def from_json_or_tab(
@@ -108,11 +124,11 @@ def from_json_or_tab(
             **kwargs
         )
     elif tab and not json:
-        if structure == 'dict'
+        if structure == 'dict':
             return {0: pd.read_csv(filepath_or_buffer, **kwargs)}
-        if structure == 'list'
+        if structure == 'list':
             return [pd.read_csv(filepath_or_buffer, **kwargs)]
-        if structure == 'tuple'
+        if structure == 'tuple':
             return (pd.read_csv(filepath_or_buffer, **kwargs),)
     else:
         try:
@@ -125,9 +141,9 @@ def from_json_or_tab(
                 **kwargs
             )
         except:
-            if structure == 'dict'
+            if structure == 'dict':
                 return {0: pd.read_csv(filepath_or_buffer, **kwargs)}
-            if structure == 'list'
+            if structure == 'list':
                 return [pd.read_csv(filepath_or_buffer, **kwargs)]
-            if structure == 'tuple'
+            if structure == 'tuple':
                 return (pd.read_csv(filepath_or_buffer, **kwargs),)
