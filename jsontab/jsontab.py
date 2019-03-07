@@ -17,27 +17,12 @@ import pandas as pd
 
 # Functions ====================================================================
 
-def generate_flat_items(d):
-    """Generate flattened items from a nested dict
-
-    Parameters
-    ----------
-    d : dict
-        a dictionary
-    """
-
-    for k, v in d.items():
-        if isinstance(v, dict):
-            yield from ((f'{k}_{l}', w) for l, w in v.items())
-        else:
-            yield k, v
-
-
 def from_json(
     filepath_or_buffer,
     orient='columns',
     dtype=None,
     columns=None,
+    structure='dict',
     **kwargs
 ):
     """Load a data frame from JSON data
@@ -66,12 +51,20 @@ def from_json(
             j = json.load(f, **kwargs)
     else:
         j = json.load(filepath_or_buffer, **kwargs)
-    return pd.DataFrame.from_dict(
-        dict(generate_flat_items(j)),
-        orient=orient,
-        dtype=dtype,
-        columns=columns
-    )
+    if structure == 'dict':
+        return {
+            k: pd.DataFrame.from_dict(
+                v,
+                orient=orient,
+                dtype=dtype,
+                columns=columns
+            )
+            for k, v in j.items()
+        }
+    if structure == 'list':
+        return [pd.DataFrame.from_dict(v) for v in j.values()]
+    if structure == 'tuple':
+        return tuple(pd.DataFrame.from_dict(v) for v in j.values())
 
 
 def from_json_or_tab(
@@ -81,6 +74,7 @@ def from_json_or_tab(
     orient='columns',
     dtype=None,
     columns=None,
+    structure='dict',
     **kwargs
 ):
     """Agnostically load JSON or tabular data
@@ -110,10 +104,16 @@ def from_json_or_tab(
             orient=orient,
             dtype=dtype,
             columns=columns,
+            structure=structure
             **kwargs
         )
     elif tab and not json:
-        return pd.read_csv(filepath_or_buffer, **kwargs)
+        if structure == 'dict'
+            return {0: pd.read_csv(filepath_or_buffer, **kwargs)}
+        if structure == 'list'
+            return [pd.read_csv(filepath_or_buffer, **kwargs)]
+        if structure == 'tuple'
+            return (pd.read_csv(filepath_or_buffer, **kwargs),)
     else:
         try:
             return from_json(
@@ -121,7 +121,13 @@ def from_json_or_tab(
                 orient=orient,
                 dtype=dtype,
                 columns=columns,
+                structure=structure
                 **kwargs
             )
         except:
-            return pd.read_csv(filepath_or_buffer, **kwargs)
+            if structure == 'dict'
+                return {0: pd.read_csv(filepath_or_buffer, **kwargs)}
+            if structure == 'list'
+                return [pd.read_csv(filepath_or_buffer, **kwargs)]
+            if structure == 'tuple'
+                return (pd.read_csv(filepath_or_buffer, **kwargs),)
