@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='jsontab',
-    version='0.0.6',
+    version='0.0.7',
     author='Anthony Aylward',
     author_email='aaylward@eng.ucsd.edu',
     description='Agnostically load JSON or tabular data',
